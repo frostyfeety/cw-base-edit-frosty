@@ -1699,11 +1699,7 @@ function SWEP:GetRecoilModifier(mod)
 	end
 	
 	if self.dt.State == CW_AIMING then
-		if self.Owner:KeyDown(IN_WALK) then
-		mod = 0.1
-		else
 		mod = mod * 0.85
-		end
 	end
 	
 	if self.dt.Suppressed then

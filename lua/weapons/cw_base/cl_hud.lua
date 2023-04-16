@@ -269,7 +269,7 @@ function SWEP:DrawHUD()
 		surface.DrawTexturedRect(x / 2 - 48, y / 2 + 125, 96, 96)
 	end
 	
-	if self.AimBreathingEnabled then
+	--[[if self.AimBreathingEnabled then
 		self.HUD_BreathAlpha = LerpCW20(FT * 10, self.HUD_BreathAlpha, (1 - self.BreathLeft))
 
 		if self.BreathLeft < 1 then
@@ -299,7 +299,7 @@ function SWEP:DrawHUD()
 				self:stopHoldingBreath(nil, nil, 0)
 			end
 		end
-	end
+	end]]--
 	
 	local disableCrosshair, disableCustomHUD, disableTabDisplay = CustomizableWeaponry.callbacks.processCategory(self, "suppressHUDElements", customHUD)
 	

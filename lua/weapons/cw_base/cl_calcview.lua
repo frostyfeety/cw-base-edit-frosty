@@ -318,11 +318,11 @@ function SWEP:CalcView(ply, pos, ang, fov)
 end
 
 function SWEP:reduceBreathAmount(recoilMod, regenTime)
-	--recoilMod = recoilMod or 0.2
-	--regenTime = regenTime or self.BreathRegenDelay
+	recoilMod = recoilMod or 0.2
+	regenTime = regenTime or self.BreathRegenDelay
 	
-	--self.breathRegenWait = CurTime() + regenTime
-	--self.BreathLeft = math.Clamp(self.BreathLeft - self.Recoil * recoilMod * 0.25, 0, 1)
+	self.breathRegenWait = CurTime() + regenTime
+	self.BreathLeft = math.Clamp(self.BreathLeft - self.Recoil * recoilMod * 0.25, 0, 1)
 end
 
 function SWEP:stopHoldingBreath(time, regenTime, recoilMod)
@@ -435,8 +435,8 @@ function SWEP.CreateMove(move)
 		
 		if wep.dt and wep.dt.State == CW_AIMING then
 			-- if wep.AimBreathingEnabled then
-				if wep.dt.State == CW_AIMING then
-					if wep.Owner:KeyDown(IN_WALK) then
+			--[[	if wep.dt.State == CW_AIMING then
+					if wep.Owner:KeyDown(IN_SPEED) then
 						if CT > wep.breathWait then
 							if not wep.noBreathHoldingUntilKeyRelease and vel < wep.BreathHoldVelocityMinimum then
 								-- can only start holding breath if we have at least 50% of our breath
@@ -469,7 +469,7 @@ function SWEP.CreateMove(move)
 			ang.y = ang.y + math.sin(CT * 1.6 * math.cos(-0.2, 1000)) * 0.001 * wep.AimBreathingIntensity * wep.CurBreatheIntensity * math.tan(-2, 20)
 			end
 
-			move:SetViewAngles(ang)
+			move:SetViewAngles(ang)]]--
 		end
 		
 		if wep.dt.BipodDeployed and wep.DeployAngle then
