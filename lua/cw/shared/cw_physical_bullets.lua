@@ -1,6 +1,6 @@
 AddCSLuaFile()
 
-CustomizableWeaponry.physicalBulletsEnabled = false
+CustomizableWeaponry.physicalBulletsEnabled = true
 CustomizableWeaponry.SUPPRESS_CLIENTSIDE_BULLET_IMPACTS = false
 CustomizableWeaponry.SUPPRESS_SERVERSIDE_BULLET_IMPACTS = true
 
