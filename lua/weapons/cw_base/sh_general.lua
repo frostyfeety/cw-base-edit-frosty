@@ -881,9 +881,9 @@ if CLIENT then
 	end
 	
 	function SWEP:getTelescopeAngles()
-		if self.freeAimOn then
-			return self.Owner:EyeAngles()
-		end
+		--if self.freeAimOn then
+		--	return self.Owner:EyeAngles()
+		--end
 		
 		return self:getMuzzlePosition().Ang
 	end

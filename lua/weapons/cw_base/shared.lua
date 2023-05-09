@@ -1394,10 +1394,10 @@ function SWEP:simulateRecoil()
 		end
 	end
 	
-	if self.freeAimOn and not self.dt.BipodDeployed then -- we only want to add the 'roll' view shake when we're not using a bipod in free-aim mode
+	--[[if self.freeAimOn and not self.dt.BipodDeployed then -- we only want to add the 'roll' view shake when we're not using a bipod in free-aim mode
 		self.lastViewRoll = math.Clamp(self.lastViewRoll + self.Recoil * 0.5, 0, 15)
 		self.lastViewRollTime = UnPredictedCurTime() + FrameTime() * 3
-	end
+	end]]
 	
 	self.lastShotTime = CurTime() + math.Clamp(self.FireDelay * 3, 0, 0.3) -- save the last time we shot
 	
@@ -1727,9 +1727,9 @@ function SWEP:GetRecoilModifier(mod)
 			end
 		end
 		
-		if self.freeAimOn then -- compensate for the lack of ViewPunch by increasing the recoil modifier by 50%
-			mod = mod * 1.5
-		end
+		--if self.freeAimOn then -- compensate for the lack of ViewPunch by increasing the recoil modifier by 50%
+		--	mod = mod * 1.5
+		--end
 	end
 	
 	-- multiply recoil in case we have a burst fire firemode enabled
@@ -1748,7 +1748,7 @@ function SWEP:GetRecoilModifier(mod)
 	return mod
 end
 
-function SWEP:isFreeAimOn()
+--[[function SWEP:isFreeAimOn()
 	if self.NoFreeAim then
 		return false
 	end
@@ -1760,7 +1760,7 @@ function SWEP:isFreeAimOn()
 	end
 	
 	return false
-end
+end]]
 
 function SWEP:MakeRecoil(mod)
 	local mod = self:GetRecoilModifier(mod)
@@ -1774,7 +1774,7 @@ function SWEP:MakeRecoil(mod)
 		self.Owner:SetEyeAngles(ang)
 	end
 
-	local freeAimOn = self:isFreeAimOn()
+	--local freeAimOn = self:isFreeAimOn()
 	
 	if not freeAimOn or (freeAimOn and self.dt.BipodDeployed) then
 		self.Owner:ViewPunch(Angle(-self.Recoil * 1.25 * mod, 0, 0))
