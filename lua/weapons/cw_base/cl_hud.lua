@@ -46,7 +46,7 @@ SWEP.HUD_HealthTextColor = Color(255, 255, 255, 255)
 SWEP.HUD_MagTextColor = Color(255, 255, 255, 255)
 SWEP.HUD_ReserveTextColor = Color(255, 255, 255, 255)
 SWEP.HUD_MagText = "MAG: "
-SWEP.HUD_BreathAlpha = 1
+--SWEP.HUD_BreathAlpha = 1
 
 function draw.ShadowText(text, font, x, y, colortext, colorshadow, dist, xalign, yalign)
 	dst(text, font, x + dist, y + dist, colorshadow, xalign, yalign)
@@ -307,7 +307,7 @@ function SWEP:DrawHUD()
 		if self.CrosshairEnabled and GetConVarNumber("cw_crosshair") > 0 then
 			lp = self.Owner:ShouldDrawLocalPlayer()
 			
-			--[[if lp or self.freeAimOn then
+			if lp or self.freeAimOn then
 				td.start = self.Owner:GetShootPos()
 				td.endpos = td.start + (self.Owner:EyeAngles() + self.Owner:GetPunchAngle()):Forward() * 16384
 				td.filter = self.Owner
@@ -318,7 +318,7 @@ function SWEP:DrawHUD()
 				x2, y2 = x2.x, x2.y
 			else
 				x2, y2 = math.Round(x * 0.5), math.Round(y * 0.5)
-			end]]
+			end
 			
 			if not self:crosshairVisible() then
 				self.CrossAlpha = LerpCW20(FT * 15, self.CrossAlpha, 0)

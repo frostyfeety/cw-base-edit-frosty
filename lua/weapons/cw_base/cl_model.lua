@@ -650,7 +650,7 @@ function SWEP:applyOffsetToVM()
 	
 	if self.freeAimOn and (self.freeAimOn and not self.dt.BipodDeployed) then
 		-- take FOV changes into account (including the breath FOV modifier, but excluding the 'continuous fire' FOV modifier)
-		local fovDiff = math.Clamp(60 / (self.ViewModelFOV - self.BreathFOVModifier * 0.5), -math.huge, math.huge)
+		--local fovDiff = math.Clamp(60 / (self.ViewModelFOV - self.BreathFOVModifier * 0.5), -math.huge, math.huge)
 		
 		if self.ViewModelFOV < 60 then
 			fovDiff = fovDiff * 1.1

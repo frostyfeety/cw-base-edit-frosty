@@ -11,7 +11,7 @@ local RotateAroundAxis = reg.Angle.RotateAroundAxis
 SWEP.LerpBackSpeed = 10
 SWEP.CurM203Angles = Angle(0, 0, 0)
 SWEP.M203AngDiff = Angle(0, 0, 0)
-SWEP.BreathFOVModifier = 0
+--SWEP.BreathFOVModifier = 0
 
 -- free aim related vars start here
 SWEP.lastEyeAngle = Angle(0, 0, 0)

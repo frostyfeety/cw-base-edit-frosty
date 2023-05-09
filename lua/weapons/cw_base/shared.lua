@@ -168,28 +168,28 @@ if CLIENT then
 	
 	SWEP.MuzzleAttachmentName = "1"
 	
-	SWEP.AimBreathingIntensity = 1
-	SWEP.CurBreatheIntensity = 1
-	SWEP.BreathLeft = 1
-	SWEP.BreathRegenRate = 0.2
-	SWEP.BreathDrainRate = 0.1
-	SWEP.BreathIntensityDrainRate = 1
-	SWEP.BreathIntensityRegenRate = 2
-	SWEP.BreathHoldVelocityMinimum = 30 -- if our velocity surpasses this, we can't hold our breath
-	SWEP.BreathDelay = 0.8
-	SWEP.BreathRegenDelay = 0.5
-	SWEP.MinimumBreathPercentage = 0.5 -- we can only hold our breath if our breath meter surpasses this
-	SWEP.BreathIntensityOnRest = 0.5
-	SWEP.BreathIntensityOnBipod = 0.2
-	SWEP.BreathIntensitySwitchRate = 2 -- speed at which it switches from regular state to resting-weapon-on-something state (resting weapon/deployed bipod)
+	--SWEP.AimBreathingIntensity = 1
+	--SWEP.CurBreatheIntensity = 1
+	--SWEP.BreathLeft = 1
+	--SWEP.BreathRegenRate = 0.2
+	--SWEP.BreathDrainRate = 0.1
+	--SWEP.BreathIntensityDrainRate = 1
+	--SWEP.BreathIntensityRegenRate = 2
+	--SWEP.BreathHoldVelocityMinimum = 30 -- if our velocity surpasses this, we can't hold our breath
+	--SWEP.BreathDelay = 0.8
+	--SWEP.BreathRegenDelay = 0.5
+	--SWEP.MinimumBreathPercentage = 0.5 -- we can only hold our breath if our breath meter surpasses this
+	--SWEP.BreathIntensityOnRest = 0.5
+	--SWEP.BreathIntensityOnBipod = 0.2
+	--SWEP.BreathIntensitySwitchRate = 2 -- speed at which it switches from regular state to resting-weapon-on-something state (resting weapon/deployed bipod)
 	SWEP.ReloadBoltBonePositionRecoverySpeed = 1
 	SWEP.ReloadBoltBonePositionMoveSpeed = 25
 	
 	SWEP.SprintViewNormals = {x = 1, y = 1, z = 1}
 	
-	SWEP.breathWait = 0
-	SWEP.breathRegenWait = 0
-	SWEP.breathReleaseWait = 0
+	--SWEP.breathWait = 0
+	--SWEP.breathRegenWait = 0
+	--SWEP.breathReleaseWait = 0
 	
 	SWEP.SwayIntensity = 1
 	SWEP.AimSwayIntensity = 0.6
@@ -439,7 +439,7 @@ function SWEP:Initialize()
 		self.BulletDisplay = t.buldis
 		self.FireModeDisplay = t.display
 		self.OverallMouseSens_Orig = self.OverallMouseSens
-		self.AimBreathingEnabled_Orig = self.AimBreathingEnabled
+		--self.AimBreathingEnabled_Orig = self.AimBreathingEnabled
 		
 		self.AimPos = self.IronsightPos
 		self.AimAng = self.IronsightAng

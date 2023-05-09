@@ -73,9 +73,9 @@ function SWEP:networkM203Chamber()
 	umsg.End()
 end
 
-function SWEP:resetAimBreathingState()
+--[[function SWEP:resetAimBreathingState()
 	self.AimBreathingEnabled = self.AimBreathingEnabled_Orig
-end
+end]]
 
 function SWEP:maxOutWeaponAmmo(desiredAmmo)
 	self:SetClip1(desiredAmmo + (self.Chamberable and 1 or 0))
