@@ -46,7 +46,7 @@ SWEP.HUD_HealthTextColor = Color(255, 255, 255, 255)
 SWEP.HUD_MagTextColor = Color(255, 255, 255, 255)
 SWEP.HUD_ReserveTextColor = Color(255, 255, 255, 255)
 SWEP.HUD_MagText = "MAG: "
-SWEP.HUD_BreathAlpha = 1
+--SWEP.HUD_BreathAlpha = 1
 
 function draw.ShadowText(text, font, x, y, colortext, colorshadow, dist, xalign, yalign)
 	dst(text, font, x + dist, y + dist, colorshadow, xalign, yalign)

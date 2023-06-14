@@ -8,7 +8,7 @@ CreateClientConVar("cw_customhud_ammo", 0, true, true)
 CreateClientConVar("cw_laser_quality", 1, true, true)
 CreateClientConVar("cw_laser_blur", 1, true, true)
 CreateClientConVar("cw_alternative_vm_pos", 0, true, true)
-CreateClientConVar("cw_freeaim", 0, true, true)
+--[[CreateClientConVar("cw_freeaim", 0, true, true)
 CreateClientConVar("cw_freeaim_autocenter", 0, true, true)
 CreateClientConVar("cw_freeaim_autocenter_aim", 0, true, true)
 CreateClientConVar("cw_freeaim_lazyaim", 0, true, true)
@@ -18,7 +18,7 @@ CreateClientConVar("cw_freeaim_pitchlimit", 10, true, true)
 
 CreateClientConVar("cw_freeaim_autocenter_time", 0.65, true, true)
 
-CreateClientConVar("cw_freeaim_center_mouse_impendance", 0.7, true, true)
+CreateClientConVar("cw_freeaim_center_mouse_impendance", 0.7, true, true)]]
 
 CreateClientConVar("cw_rt_scope_quality", 2, true, true)
 

@@ -11,7 +11,7 @@ local RotateAroundAxis = reg.Angle.RotateAroundAxis
 SWEP.LerpBackSpeed = 10
 SWEP.CurM203Angles = Angle(0, 0, 0)
 SWEP.M203AngDiff = Angle(0, 0, 0)
-SWEP.BreathFOVModifier = 0
+--SWEP.BreathFOVModifier = 0
 
 -- free aim related vars start here
 SWEP.lastEyeAngle = Angle(0, 0, 0)
@@ -33,7 +33,7 @@ SWEP.autoCenterExclusions = {[CW_RUNNING] = true,
 
 local Ang0 = Angle(0, 0, 0)
 
-function SWEP:getFreeAimToCenter()
+--[[function SWEP:getFreeAimToCenter()
 	local ang = self.Owner:EyeAngles()
 	
 	return math.AngleDifference(self.lastEyeAngle.y, ang.y) + math.AngleDifference(self.lastEyeAngle.p, ang.p)
@@ -45,10 +45,10 @@ function SWEP:getFreeAimDotToCenter()
 	return dist / (GetConVarNumber("cw_freeaim_yawlimit") + GetConVarNumber("cw_freeaim_pitchlimit"))
 end
 
-SWEP.freeAimAutoCenterSpeed = 6
+SWEP.freeAimAutoCenterSpeed = 6]]
 
 function SWEP:CalcView(ply, pos, ang, fov)
-	self.freeAimOn = self:isFreeAimOn()
+	--[[self.freeAimOn = self:isFreeAimOn()
 	self.autoCenterFreeAim = GetConVarNumber("cw_freeaim_autocenter") > 0
 	
 	if self.dt.BipodDeployed then
@@ -62,7 +62,7 @@ function SWEP:CalcView(ply, pos, ang, fov)
 	if self.freeAimOn then
 		fov = 100 -- force FOV to 90 when in free aim mode, unfortunately, due to angles getting fucked up when FOV is not 90
 		RunConsoleCommand("fov_desired", 100)
-	end
+	end]]
 	
 	-- if we have free aim on, and we are not using a bipod, or we're using a bipod and we have not run out of "free aim time", then we should simulate free aim
 	if self.freeAimOn and (not self.forceFreeAimOffTime or CurTime() < self.forceFreeAimOffTime) then
@@ -81,7 +81,7 @@ function SWEP:CalcView(ply, pos, ang, fov)
 				self.lastEyeAngle.p = math.Clamp(self.lastEyeAngle.p + self.mouseY * lazyAim * dot, -89, 89)
 			end
 		end
-		
+		//вызывает ошибку
 		if self.autoCenterFreeAim then
 			if self.mouseActive then
 				self.lastMouseActivity = CurTime() + GetConVarNumber("cw_freeaim_autocenter_time")
@@ -106,7 +106,7 @@ function SWEP:CalcView(ply, pos, ang, fov)
 				shouldAutoCenter = true
 			end
 		
-			if canAutoCenter then
+			--[[if canAutoCenter then
 				local frameTime = FrameTime()
 				
 				self.freeAimAutoCenterSpeed = frameTime * 16
@@ -129,14 +129,14 @@ function SWEP:CalcView(ply, pos, ang, fov)
 				if shouldAutoCenter then
 					self.lastEyeAngle = LerpAngle(self.freeAimAutoCenterSpeed, self.lastEyeAngle, self.Owner:EyeAngles())
 				end
-			end
+			end]]
 		end
 		
 		local yawDiff = math.AngleDifference(self.lastEyeAngle.y, ang.y)
 		local pitchDiff = math.AngleDifference(self.lastEyeAngle.p, ang.p)
 		
-		local yawLimit = GetConVarNumber("cw_freeaim_yawlimit")
-		local pitchLimit = GetConVarNumber("cw_freeaim_pitchlimit")
+		--local yawLimit = GetConVarNumber("cw_freeaim_yawlimit")
+		--local pitchLimit = GetConVarNumber("cw_freeaim_pitchlimit")
 		
 		if yawDiff >= yawLimit then
 			self.lastEyeAngle.y = math.NormalizeAngle(ang.y + yawLimit)
@@ -278,7 +278,7 @@ function SWEP:CalcView(ply, pos, ang, fov)
 		end
 	end
 	
-	if self.holdingBreath then
+	--[[if self.holdingBreath then
 		self.OverallMouseSens = 0.7
 		self.BreathFOVModifier = math.Approach(self.BreathFOVModifier, 7, FT * 40)
 	else
@@ -286,7 +286,7 @@ function SWEP:CalcView(ply, pos, ang, fov)
 		self.BreathFOVModifier = math.Approach(self.BreathFOVModifier, 0, FT * 50)
 	end
 	
-	fov = math.Clamp(fov - self.CurFOVMod - self.BreathFOVModifier, 5, 100)
+	fov = math.Clamp(fov - self.CurFOVMod - self.BreathFOVModifier, 5, 100)]]
 	
 	if self.Owner then
 		if self.ViewbobEnabled then
@@ -317,7 +317,7 @@ function SWEP:CalcView(ply, pos, ang, fov)
 	return pos, ang + curviewbob * self.ViewbobIntensity, fov
 end
 
-function SWEP:reduceBreathAmount(recoilMod, regenTime)
+--[[function SWEP:reduceBreathAmount(recoilMod, regenTime)
 	recoilMod = recoilMod or 0.2
 	regenTime = regenTime or self.BreathRegenDelay
 	
@@ -337,7 +337,7 @@ function SWEP:stopHoldingBreath(time, regenTime, recoilMod)
 	else
 		self.breathRegenWait = CurTime() + 0.2
 	end
-end
+end]]
 
 function SWEP.CreateMove(move)
 	ply = LocalPlayer()
@@ -387,12 +387,12 @@ function SWEP.CreateMove(move)
 			return
 		end
 		
-		if wep.freeAimOn then
+		--[[if wep.freeAimOn then
 			wep.mouseX = move:GetMouseX()
 			wep.mouseY = move:GetMouseY()
 			
 			wep.mouseActive = wep.mouseX ~= 0 or wep.mouseY ~= 0
-		end
+		end]]
 		
 		local vel = ply:GetVelocity():Length()
 		local aiming = wep.dt.State == CW_AIMING
@@ -502,14 +502,14 @@ hook.Add("CreateMove", "CW20 CreateMove", SWEP.CreateMove)
 function SWEP:AdjustMouseSensitivity()
 	local sensitivity = 1
 	local mod = math.Clamp(self.OverallMouseSens, 0.1, 1) -- not lower than 10% and not higher than 100% (in case someone uses atts that increase handling)
-	local freeAimMod = 1
+	--local freeAimMod = 1
 	
-	if self.freeAimOn and not self.dt.BipodDeployed then
+	--[[if self.freeAimOn and not self.dt.BipodDeployed then
 		local dist = math.abs(self:getFreeAimDotToCenter())
 		
 		local mouseImpendance = GetConVarNumber("cw_freeaim_center_mouse_impendance")
 		freeAimMod = 1 - (mouseImpendance - mouseImpendance * dist)
-	end
+	end]]
 	
 	if self.dt.State == CW_RUNNING then
 			if GetConVarNumber("cwc_sprint_fov") > 0 then
@@ -532,7 +532,7 @@ function SWEP:AdjustMouseSensitivity()
 	end
 	
 	sensitivity = sensitivity * mod
-	sensitivity = sensitivity * freeAimMod
+	--sensitivity = sensitivity * freeAimMod
 	
 	return sensitivity --1 * self.OverallMouseSens
 end

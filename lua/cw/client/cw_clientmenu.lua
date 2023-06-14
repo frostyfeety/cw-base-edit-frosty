@@ -43,11 +43,11 @@ local function CW2_ClientsidePanel(panel)
 	panel:AddControl("CheckBox", {Label = "BLUR: On aim?", Command = "cw_blur_aim_telescopic"})
 	panel:AddControl("CheckBox", {Label = "Use simple telescopics?", Command = "cw_simple_telescopics"})
 	
-	panel:AddControl("CheckBox", {Label = "FREE AIM: activate?", Command = "cw_freeaim"})
-	panel:AddControl("CheckBox", {Label = "FREE AIM: use auto-center?", Command = "cw_freeaim_autocenter"})
-	panel:AddControl("CheckBox", {Label = "FREE AIM: auto-center while aiming?", Command = "cw_freeaim_autocenter_aim"})
+	--panel:AddControl("CheckBox", {Label = "FREE AIM: activate?", Command = "cw_freeaim"})
+	--panel:AddControl("CheckBox", {Label = "FREE AIM: use auto-center?", Command = "cw_freeaim_autocenter"})
+	--panel:AddControl("CheckBox", {Label = "FREE AIM: auto-center while aiming?", Command = "cw_freeaim_autocenter_aim"})
 	
-	-- autocenter time slider
+	--[[-- autocenter time slider
 	local slider = vgui.Create("DNumSlider", panel)
 	slider:SetDecimals(2)
 	slider:SetMin(0.1)
@@ -97,7 +97,7 @@ local function CW2_ClientsidePanel(panel)
 	slider:SetValue(GetConVarNumber("cw_freeaim_yawlimit"))
 	slider:SetText("FREE AIM: yaw freedom")
 	
-	panel:AddItem(slider)
+	panel:AddItem(slider)]]
 	
 	local laserQ = vgui.Create("DComboBox", panel)
 	laserQ:SetText("Laser quality:" .. CW2_GetLaserQualityText(GetConVarNumber("cw_laser_quality")))

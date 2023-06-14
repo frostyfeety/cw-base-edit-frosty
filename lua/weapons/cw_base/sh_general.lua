@@ -73,9 +73,9 @@ function SWEP:networkM203Chamber()
 	umsg.End()
 end
 
-function SWEP:resetAimBreathingState()
+--[[function SWEP:resetAimBreathingState()
 	self.AimBreathingEnabled = self.AimBreathingEnabled_Orig
-end
+end]]
 
 function SWEP:maxOutWeaponAmmo(desiredAmmo)
 	self:SetClip1(desiredAmmo + (self.Chamberable and 1 or 0))
@@ -881,9 +881,9 @@ if CLIENT then
 	end
 	
 	function SWEP:getTelescopeAngles()
-		if self.freeAimOn then
-			return self.Owner:EyeAngles()
-		end
+		--if self.freeAimOn then
+		--	return self.Owner:EyeAngles()
+		--end
 		
 		return self:getMuzzlePosition().Ang
 	end
