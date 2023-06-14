@@ -74,7 +74,7 @@ CustomizableWeaponry:addFireSound("CWC_MAGNUMSUBLESSER", {"cw/subsound/magsubnew
 CustomizableWeaponry:addFireSound("CWC_MAGNUMSUBSUPPRESSED", {"cw/subsound/magsubnewsup.wav"}) 
 CustomizableWeaponry:addReloadSound("CWC_MATCHSUB", {"cw/subsound/matchsub1.wav", "cw/subsound/matchsub2.wav", "cw/subsound/matchsub3.wav", "cw/subsound/matchsub4.wav", "cw/subsound/matchsub5.wav", "cw/subsound/matchsub6.wav"}) 
 CustomizableWeaponry:addReloadSound("CWC_FLECHETTESUB", {"cw/subsound/flechettesub.wav"}) 
-CustomizableWeaponry:addFireSound("CWC_BLOSSOMSUB", {"cw/subsound/bloss1.wav", "cw/subsound/bloss2.wav", "cw/subsound/bloss3.wav", "cw/subsound/bloss4.wav", "cw/subsound/bloss5.wav", "cw/subsound/bloss6.wav"}, 1, 115, CHAN_WEAPON) 
+CustomizableWeaponry:addFireSound("CWC_BLOSSOMSUB", {"cw/subsound/bloss1.wav", "cw/subsound/bloss2.wav", "cw/subsound/bloss3.wav", "cw/subsound/bloss4.wav", "cw/subsound/bloss5.wav", "cw/subsound/bloss6.wav"}, 1, 115, CHAN_STATIC) 
 CustomizableWeaponry:addReloadSound("CWC_SUPSUB", {"cw/subsound/supsub1.wav", "cw/subsound/supsub2.wav", "cw/subsound/supsub3.wav", "cw/subsound/supsub4.wav", "cw/subsound/supsub5.wav", "cw/subsound/supsub6.wav", "cw/subsound/supsub7.wav", "cw/subsound/supsub8.wav", "cw/subsound/supsub9.wav", "cw/subsound/supsub10.wav"})
 CustomizableWeaponry:addFire2Sound("CWC_SUBDOOT", {"cw/subsound/doot1.wav"})
 CustomizableWeaponry:addFire2Sound("CWC_LUCKYLAST", {"cw/subsound/luckylast1.wav"})
