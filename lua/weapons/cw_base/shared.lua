@@ -1780,15 +1780,15 @@ function SWEP:MakeRecoil(mod)
 		self.Owner:ViewPunch(Angle(-self.Recoil * 1.25 * mod, 0, 0))
 	end
 	
-	if CLIENT and IFTP then
-		if self.AimBreathingEnabled then
-			if self.holdingBreath then
-				self:reduceBreathAmount(mod)
-			else
-				self:reduceBreathAmount(0)
-			end
-		end
-	end
+	--if CLIENT and IFTP then
+		--if self.AimBreathingEnabled then
+			--if self.holdingBreath then
+				--self:reduceBreathAmount(mod)
+			--else
+				--self:reduceBreathAmount(0)
+			--end
+		--end
+	--end
 end
 
 function SWEP:SecondaryAttack()
