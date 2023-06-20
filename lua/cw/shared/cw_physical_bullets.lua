@@ -296,7 +296,7 @@ function CustomizableWeaponry:processBullets(ply, ucmd)
 	local frameTime = FrameTime()
 	
 	if bullets then
-		local ft = FrameTime()
+		local ft = 0.01 --FrameTime()
 		
 		for i = 1, #bullets do			
 			if self:processPhysicalBullet(bullets[curIndex], ft) then
