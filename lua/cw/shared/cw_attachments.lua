@@ -12,7 +12,7 @@ CustomizableWeaponry.giveAllAttachmentsOnSpawn = 1 -- set to 0 to disable all at
 CustomizableWeaponry.canOpenInteractionMenu = true -- whether the interaction menu can be opened
 CustomizableWeaponry.playSoundsOnInteract = true -- whether it should play sounds when interacting with the weapon (attaching stuff, changing ammo, etc)
 CustomizableWeaponry.customizationEnabled = true -- whether we can customize our guns in general
-CustomizableWeaponry.customizationMenuKey = "+menu_context" -- the key we need to press to toggle the customization menu
+CustomizableWeaponry.customizationMenuKey = "+zoom" -- the key we need to press to toggle the customization menu
 
 CustomizableWeaponry.textColors = {POSITIVE = Color(200, 255, 200, 255),
 	NEGATIVE = Color(255, 200, 200, 255),
