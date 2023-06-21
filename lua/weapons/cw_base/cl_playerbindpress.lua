@@ -74,7 +74,7 @@ function SWEP.PlayerBindPress(ply, b, p)
 					end
 				else
 					if wep.dt.State == CW_CUSTOMIZE then
-						--[[if wep.CustomizationTab == CustomizableWeaponry.interactionMenu.CUSTOMIZATION_TAB then
+						if wep.CustomizationTab == CustomizableWeaponry.interactionMenu.CUSTOMIZATION_TAB then
 							if wep.processSlotKeyPress(wep, b, p) then
 								return true
 							end
@@ -99,7 +99,7 @@ function SWEP.PlayerBindPress(ply, b, p)
 									return true
 								end
 							end
-						end]]--
+						end
 						
 						local result = CustomizableWeaponry.interactionMenu.keyPressed(wep, b, p)
 						
