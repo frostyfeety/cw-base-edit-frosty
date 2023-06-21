@@ -354,7 +354,7 @@ if CLIENT then
 		if wep:_attach(category, pos) then
 			if CustomizableWeaponry.playSoundsOnInteract then
 				if CurTime() > wep.AttachSoundDelay then
-					surface.PlaySound("cw/attach.wav")
+					surface.PlaySound("cw/attach"..math.random(1,4)..".wav")
 					wep.AttachSoundDelay = CurTime() + FrameTime() * 3
 				end
 			end
