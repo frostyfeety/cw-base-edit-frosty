@@ -360,9 +360,17 @@ if CLIENT then
 		end
 		
 		if wep:_attach(category, pos) then
+<<<<<<< HEAD
 			if wep:canPlayCustomizeSound() and CurTime() > wep.AttachSoundDelay then
 				surface.PlaySound("cw/attach.wav")
 				wep.AttachSoundDelay = CurTime() + FrameTime() * 3
+=======
+			if CustomizableWeaponry.playSoundsOnInteract then
+				if CurTime() > wep.AttachSoundDelay then
+					surface.PlaySound("cw/attach"..math.random(1,4)..".wav")
+					wep.AttachSoundDelay = CurTime() + FrameTime() * 3
+				end
+>>>>>>> f3e1153f8348e0fbdf6c4a0da48c09e6a61fb490
 			end
 		end
 	end
@@ -435,5 +443,10 @@ if CLIENT then
 		end
 	end
 	
+<<<<<<< HEAD
 	net.Receive("CW20_PRESETDETACH", CW20_PRESETDETACH)
 end
+=======
+	usermessage.Hook("CW20_PRESETDETACH", CW20_PRESETDETACH)
+end
+>>>>>>> f3e1153f8348e0fbdf6c4a0da48c09e6a61fb490
