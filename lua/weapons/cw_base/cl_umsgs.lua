@@ -45,6 +45,17 @@ end
 
 usermessage.Hook("CW20_GLOBALDELAY", CW20_GLOBALDELAY)
 
+local function CW20_FOOTSTEP(um)
+	local ply = LocalPlayer()
+	local wep = ply:GetActiveWeapon()
+
+	if IsValid(wep) and wep.CW20Weapon then
+		wep:addRunTime()
+	end
+end
+
+usermessage.Hook("CW20_FOOTSTEP", CW20_FOOTSTEP)
+
 local function CW20_FORCESTATE(um)
 	local ply = LocalPlayer()
 	local wep = ply:GetActiveWeapon()
@@ -111,8 +122,8 @@ end
 
 usermessage.Hook("CW20_RELOADM203", CW20_RELOADM203)
 
-local function CW20_GRENADETYPE(um)
-	local grenType = um:ReadShort()
+local function CW20_GRENADETYPE()
+	local grenType = net.ReadUInt(8)
 	local ply = LocalPlayer()
 	local wep = ply:GetActiveWeapon()
 
@@ -125,13 +136,13 @@ local function CW20_GRENADETYPE(um)
 	end
 end
 
-usermessage.Hook("CW20_GRENADETYPE", CW20_GRENADETYPE)
+net.Receive("CW20_GRENADETYPE", CW20_GRENADETYPE)
 
-local function CW20_M203CHAMBER(um)
-	local wep = um:ReadEntity()
-	local state = um:ReadBool()
+local function CW20_M203CHAMBER()
+	local wep = net.ReadEntity()--um:ReadEntity()
+	local state = net.ReadBool() --um:ReadBool()
 	
 	wep.M203Chamber = state
 end
 
-usermessage.Hook("CW20_M203CHAMBER", CW20_M203CHAMBER)
+net.Receive("CW20_M203CHAMBER", CW20_M203CHAMBER)

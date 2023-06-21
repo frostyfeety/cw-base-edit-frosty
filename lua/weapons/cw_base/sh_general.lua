@@ -14,10 +14,19 @@ first index a string containing attachments that it depends on
 second index is a string which contains the vector position
 ]]--
 
+if SERVER then
+	util.AddNetworkString("CW20_M203CHAMBER")
+end
+
 function LerpCW20(val, min, max) -- basically a wrapper that limits 'val' (aka progress) to a max of 1
 	val = val > 1 and 1 or val
 	return Lerp(val, min, max)
 end
+
+function SWEP:canPlayCustomizeSound()
+	return CustomizableWeaponry.playSoundsOnInteract or (CustomizableWeaponry.playSoundsOnModify and self.dt.State == CW_CUSTOMIZE)
+end
+
 
 function SWEP:canCustomize()
 	if not self.CanCustomize then
@@ -67,10 +76,10 @@ function SWEP:setM203Chamber(state)
 end
 
 function SWEP:networkM203Chamber()
-	umsg.Start("CW20_M203CHAMBER", self.Owner)
-		umsg.Entity(self)
-		umsg.Bool(self.M203Chamber)
-	umsg.End()
+	net.Start("CW20_M203CHAMBER")
+		net.WriteEntity(self)
+		net.WriteBool(self.M203Chamber)
+	net.Send(self.Owner)
 end
 
 --[[function SWEP:resetAimBreathingState()

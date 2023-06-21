@@ -24,7 +24,6 @@ if CLIENT then
 		end
 		
 		local lastOffset = math.floor(self:getOffset(self.currentAttConfigData, self.currentAttConfigData.adjustment) * 20) -- floor + multiply by 20 to achieve increases in the value every 5
-		
 		modelData.pos[adjustRange.axis] = math.Clamp(modelData.pos[adjustRange.axis] + range * direction, adjustRange.min, adjustRange.max)
 		
 		local curOffset = math.floor(self:getOffset(self.currentAttConfigData, self.currentAttConfigData.adjustment) * 20)
@@ -40,6 +39,12 @@ if CLIENT then
 		self.currentAttData = attData
 		self.currentAttConfigData = attData2
 		self.currentModelData = modelData
+		
+		if modelData then		
+			-- create a new vector object, so that it doesn't overwrite origPos
+			local pos = modelData.pos * 1
+			modelData.pos = pos
+		end
 	end
 	
 	function CustomizableWeaponry.sightAdjustment:getCurrentAttachment()
@@ -48,14 +53,11 @@ if CLIENT then
 	
 	function CustomizableWeaponry.sightAdjustment:getAdjustmentModelData(modelData, adjustment)
 		if modelData.models then
-			print("blaze")
 			
 			if modelData.adjustment.index then
 				modelData = modelData.models[modelData.adjustment.index]
-				print("wew")
 			else
 				modelData = modelData.models[1]
-				print("dayum", modelData)
 			end
 		end
 	end
@@ -77,18 +79,14 @@ if CLIENT then
 			if attachment then
 				local attData = wep.AttachmentModelsVM[attachment]
 				
-				if attData and attData.adjustment then -- if there is an attachment like this, and it can be adjusted, set it as the current adjustable attachment
+				if attData and attData.adjustment and not wep:getPreventedAdjustment(attData) then -- if there is an attachment like this, and it can be adjusted, set it as the current adjustable attachment
 					local modelData = attData
 					
 					if modelData.models then
-						print("blaze")
-						
 						if attData.adjustment.index then
 							modelData = modelData.models[attData.adjustment.index]
-							print("wew")
 						else
 							modelData = modelData.models[1]
-							print("dayum", modelData)
 						end
 					end
 					
@@ -126,11 +124,11 @@ if CLIENT then
 		end
 		
 		if offset >= 0.66 then
-			return "(LONG RANGE)"
+			return "(FAR)"
 		elseif offset >= 0.33 then
-			return "(MID RANGE)"
+			return "(MID)"
 		else
-			return "(CLOSE RANGE)"
+			return "(CLOSE)"
 		end
 	end
 	

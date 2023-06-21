@@ -751,6 +751,16 @@ function SWEP:_drawViewModel()
 	self.CW_VM:SetupBones()
 	self.CW_VM:DrawModel()
 	
+	if self.UseHands then -- bonemerge da shiz
+		local hands = self.Owner:GetHands()
+		
+		if IsValid(hands) then
+			hands:SetParent(self.CW_VM)
+			hands:AddEffects(EF_BONEMERGE)
+			hands:DrawModel()
+		end
+	end
+	
 	if self.ViewModelFlip then
 		render.CullMode(MATERIAL_CULLMODE_CCW)
 	end

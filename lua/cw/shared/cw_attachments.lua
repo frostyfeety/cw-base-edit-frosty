@@ -12,7 +12,7 @@ CustomizableWeaponry.giveAllAttachmentsOnSpawn = 1 -- set to 0 to disable all at
 CustomizableWeaponry.canOpenInteractionMenu = true -- whether the interaction menu can be opened
 CustomizableWeaponry.playSoundsOnInteract = true -- whether it should play sounds when interacting with the weapon (attaching stuff, changing ammo, etc)
 CustomizableWeaponry.customizationEnabled = true -- whether we can customize our guns in general
-CustomizableWeaponry.customizationMenuKey = "+menu_context" -- the key we need to press to toggle the customization menu
+CustomizableWeaponry.customizationMenuKey = "+zoom" -- the key we need to press to toggle the customization menu
 
 CustomizableWeaponry.textColors = {POSITIVE = Color(200, 255, 200, 255),
 	NEGATIVE = Color(255, 200, 200, 255),
@@ -84,6 +84,14 @@ function CustomizableWeaponry:registerAttachment(tbl)
 	end
 	
 	if CLIENT then
+		if tbl.description then
+			tbl._description = {}
+			
+			for a, b in ipairs(tbl.description) do
+				tbl._description[a] = b
+			end
+		end
+		
 		self:createStatText(tbl)
 	end
 
@@ -175,9 +183,13 @@ function CustomizableWeaponry:createStatText(att)
 		return
 	end
 	
-	-- create a new desc table in case it has none
-	if not att.description then
-		att.description = {}
+	-- create a new desc table regardless
+	att.description = {}
+	
+	if att._description then
+		for key, data in ipairs(att._description) do
+			att.description[key] = data
+		end
 	end
 	
 	local pos = 0
@@ -267,9 +279,9 @@ function CustomizableWeaponry:formatWeaponStatText(target, amount)
 	if statText then
 		-- return text and colors as specified in the table
 		if amount < 0 then
-			return statText.lesser .. by .. math.Round(math.abs(amount * 100)) .. percentage, statText.lesserColor
+			return statText.lesser .. by .. math.Round(math.abs(amount * 100), 1) .. percentage, statText.lesserColor
 		elseif amount > 0 then
-			return statText.greater .. by .. math.Round(math.abs(amount * 100)) .. percentage, statText.greaterColor
+			return statText.greater .. by .. math.Round(math.abs(amount * 100), 1) .. percentage, statText.greaterColor
 		end
 	end
 	

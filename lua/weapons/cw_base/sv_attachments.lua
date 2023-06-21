@@ -1,3 +1,5 @@
+util.AddNetworkString("CW20_GRENADETYPE")
+
 function SWEP:attachSpecificAttachment(attachmentName)
 	-- since we don't know the category, we'll just have to iterate over all attachments, find the one we want, and attach it there
 	for category, data in pairs(self.Attachments) do
@@ -103,11 +105,12 @@ function SWEP:detach(category)
 	
 	self:_detach(category, last)
 	
-	umsg.Start("CW20_DETACH", self.Owner)
-		umsg.Entity(self)
-		umsg.String(category)
-		umsg.Short(last)
-	umsg.End()
+	net.Start("CW20_DETACH")
+		net.WriteEntity(self)
+		net.WriteString(category)
+		net.WriteUInt(last, 8)
+	net.Send(self.Owner)
+	
 	
 	-- call the default reset function (to reset shit like FOV, etc.) 
 	--self:resetPostDetach(foundAtt, att)
@@ -116,9 +119,9 @@ end
 function SWEP:cycle40MMGrenades()
 	CustomizableWeaponry.grenadeTypes.cycleGrenades(self)
 	
-	umsg.Start("CW20_GRENADETYPE", self.Owner)
-		umsg.Short(self.Grenade40MM)
-	umsg.End()
+	net.Start("CW20_GRENADETYPE")
+		net.WriteUInt(self.Grenade40MM, 8)
+	net.Send(self.Owner)
 end
 
 function SWEP:toggleCustomization()

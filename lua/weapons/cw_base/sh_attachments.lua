@@ -3,16 +3,24 @@
 ]]--
 SWEP.AttachSoundDelay = 0
 
+if SERVER then
+	util.AddNetworkString("CW20_ATTACH")
+	util.AddNetworkString("CW20_DETACH")
+	util.AddNetworkString("CW20_DETACHALL")
+	util.AddNetworkString("CW20_PRESETSUCCESS")
+	util.AddNetworkString("CW20_PRESETDETACH")
+end
+
 function SWEP:_attach(cur, curPos, inherit)
 	self.LastPreset = nil
 	local attTable = self.Attachments[cur]
 	
 	if SERVER then
-		umsg.Start("CW20_ATTACH", self.Owner)
-			umsg.Entity(self)
-			umsg.String(cur)
-			umsg.Short(curPos)
-		umsg.End()
+		net.Start("CW20_ATTACH")
+			net.WriteEntity(self)
+			net.WriteString(cur)
+			net.WriteUInt(curPos, 8)
+		net.Send(self.Owner)
 	end
 	
 	local att = inherit or CustomizableWeaponry:findAttachment(attTable.atts[curPos])
@@ -229,9 +237,9 @@ function SWEP:detachAll()
 	end
 	
 	if SERVER then
-		umsg.Start("CW20_DETACHALL", self.Owner)
-			umsg.Entity(self)
-		umsg.End()
+		net.Start("CW20_DETACHALL")
+			net.WriteEntity(self)
+		net.Send(self.Owner)
 		
 		--SendUserMessage("CW20_DETACHALL", self.Owner)
 	end
@@ -335,9 +343,9 @@ end
 
 if CLIENT then
 	local function CW20_ATTACH(um)
-		local wep = um:ReadEntity()
-		local category = um:ReadString()
-		local pos = um:ReadShort()
+		local wep = net.ReadEntity() --um:ReadEntity()
+		local category = net.ReadString() --um:ReadString()
+		local pos = net.ReadUInt(8) --um:ReadShort()
 		
 		local numberCategory = tonumber(category)
 		
@@ -352,21 +360,19 @@ if CLIENT then
 		end
 		
 		if wep:_attach(category, pos) then
-			if CustomizableWeaponry.playSoundsOnInteract then
-				if CurTime() > wep.AttachSoundDelay then
-					surface.PlaySound("cw/attach.wav")
-					wep.AttachSoundDelay = CurTime() + FrameTime() * 3
-				end
+			if wep:canPlayCustomizeSound() and CurTime() > wep.AttachSoundDelay then
+				surface.PlaySound("cw/attach.wav")
+				wep.AttachSoundDelay = CurTime() + FrameTime() * 3
 			end
 		end
 	end
 	
-	usermessage.Hook("CW20_ATTACH", CW20_ATTACH)
+	net.Receive("CW20_ATTACH", CW20_ATTACH)
 	
-	local function CW20_DETACH(um)
-		local wep = um:ReadEntity()
-		local category = um:ReadString()
-		local pos = um:ReadShort()
+	local function CW20_DETACH()
+		local wep = net.ReadEntity() --um:ReadEntity()
+		local category = net.ReadString() --um:ReadString()
+		local pos = net.ReadUInt(8) --um:ReadShort()
 		
 		local numberCategory = tonumber(category)
 		
@@ -383,18 +389,19 @@ if CLIENT then
 		wep:_detach(category, pos)
 		
 		if CustomizableWeaponry.playSoundsOnInteract then
-			if CurTime() > wep.AttachSoundDelay then
+			if wep:canPlayCustomizeSound() and CurTime() > wep.AttachSoundDelay then
 				surface.PlaySound("cw/detach.wav")
 				wep.AttachSoundDelay = CurTime() + FrameTime() * 3
 			end
 		end
 	end
 	
-	usermessage.Hook("CW20_DETACH", CW20_DETACH)
+	net.Receive("CW20_DETACH", CW20_DETACH)
+	
 	
 	local function CW20_DETACHALL(data)
 		local ply = LocalPlayer()
-		local wep = data:ReadEntity()
+		local wep = net.ReadEntity() --data:ReadEntity()
 		
 		if not IsValid(wep) or not wep.CW20Weapon then
 			return
@@ -404,10 +411,10 @@ if CLIENT then
 		wep:detachAll(category, pos)
 	end
 	
-	usermessage.Hook("CW20_DETACHALL", CW20_DETACHALL)
+	net.Receive("CW20_DETACHALL", CW20_DETACHALL)
 	
-	local function CW20_PRESETSUCCESS(um)
-		local presetName = um:ReadString()
+	local function CW20_PRESETSUCCESS()
+		local presetName = net.ReadString()
 		
 		local ply = LocalPlayer()
 		local wep = ply:GetActiveWeapon()
@@ -420,13 +427,13 @@ if CLIENT then
 		wep.LastPreset = presetName
 	end
 	
-	usermessage.Hook("CW20_PRESETSUCCESS", CW20_PRESETSUCCESS)
+	net.Receive("CW20_PRESETSUCCESS", CW20_PRESETSUCCESS)
 	
-	local function CW20_PRESETDETACH(um)
+	local function CW20_PRESETDETACH()
 		if CustomizableWeaponry.playSoundsOnInteract then
 			surface.PlaySound("cw/detach.wav")
 		end
 	end
 	
-	usermessage.Hook("CW20_PRESETDETACH", CW20_PRESETDETACH)
+	net.Receive("CW20_PRESETDETACH", CW20_PRESETDETACH)
 end

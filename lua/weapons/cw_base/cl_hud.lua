@@ -476,9 +476,9 @@ function SWEP:DrawHUD()
 	end
 	
 	if not disableTabDisplay then
-		if self.dt.State == CW_CUSTOMIZE then
-			self:drawTabDisplay()
-		end
+		--if self.dt.State == CW_CUSTOMIZE then
+		--	self:drawTabDisplay()
+		--end
 		
 		CustomizableWeaponry.callbacks.processCategory(self, "drawToHUD", customHUD)
 	end

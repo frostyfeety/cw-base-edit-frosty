@@ -15,11 +15,10 @@ net.Receive("CW20_OVERWRITEATTACHMENTS", function()
 	local str = net.ReadString()
 	
 	-- remove previous attachments
-	if (type(ply.CWAttachments) == "Table") or (type(ply.CWAttachments) == "table") then
-		for k, v in pairs(ply.CWAttachments) do
-			ply.CWAttachments[k] = nil
-		end
+	for k, v in pairs(ply.CWAttachments) do
+		ply.CWAttachments[k] = nil
 	end
+
 	CustomizableWeaponry.decodeAttachmentString(ply, str)
 end)
 
