@@ -43,4 +43,4 @@ if CLIENT then
 	end
 end
 
-CustomizableWeaponry.interactionMenu:addTab(tab)
+--CustomizableWeaponry.interactionMenu:addTab(tab)
